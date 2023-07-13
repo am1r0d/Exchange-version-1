@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 
+// Api
 import { getCoin } from "../services/api";
+
+// Components
 import Loader from "./Loader";
 import Coin from "./Coin";
+
+// Styles
+import styles from "./Landing.module.css";
 
 const Landing = () => {
     const [coins, setCoins] = useState([]);
     const [search, setSearch] = useState("");
+
     useEffect(() => {
         const fetchApi = async () => {
             const data = await getCoin();
@@ -27,13 +34,14 @@ const Landing = () => {
     return (
         <>
             <input
+                className={styles.input}
                 type="text"
                 placeholder="Search"
                 value={search}
                 onChange={searchHandler}
             />
             {coins.length ? (
-                <div>
+                <div className={styles.coinContainer}>
                     {searchedCoins.map((item) => (
                         <Coin
                             key={item.id}
